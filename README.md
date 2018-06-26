@@ -1,5 +1,3 @@
-# cloudcustodian-policies
-
 # Sahana's Cloud Custodian Policies 
 
 ## Policies in Production
