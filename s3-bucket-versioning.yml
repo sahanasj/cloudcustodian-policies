@@ -1,0 +1,41 @@
+policies:
+  - name: s3-enable-versioning
+    resource: s3
+    description: |
+       This lambda is triggered when a S3 bucket versioning is Disabled/Suspended.
+       It enables the S3 object versioning.
+    mode:
+      type: config-rule
+      #type: periodic
+      #schedule: 'cron(0/1 * * * ? *)'
+      #schedule: 'rate(10 minutes)'
+      # timeout: 300
+      role: arn:aws:iam::930337447539:role/S3-GovernanceForLincoln
+    filters:
+      - or:
+        - type: value
+          key: Versioning.Status
+          value: Suspended
+        - type: value
+          key: Versioning.Status
+          value: absent
+    actions:
+      - type: toggle-versioning
+        enabled: true
+      - type: notify
+        #template: lfg_customC7N.html
+        template: default.html
+        template_format: 'html'
+        priority_header: '3'
+        subject: "ATTN!! CloudCustodian - S3 : Versioning is Disabled/Suspended on Bucket - [AWS Account: {{ account }} - Region: {{ region }}]"
+        comments: "Violation of S3 Object Versioning - An attempt to disable/suspend the bucket!"
+        violation_desc: |
+            Versioning disabled/suspension were placed on the bucket!
+            Custodian Lambda function enables verioning on S3 Buckets, and notify team of out-of-compliance policies via SES Service.
+            The following bucket versioning has been suspended!.
+        action_desc: "Actions Taken: Enabling versioning on a bucket and Notified User"
+        to:
+          - sjayaramu@eplus.com,SSompuraJayaramu@eplus.com
+        transport:
+          type: sqs
+          queue: https://sqs.us-east-1.amazonaws.com/930337447539/c7n_mailer_for_s3_events
