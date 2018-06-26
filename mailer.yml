@@ -1,0 +1,11 @@
+# Which queue should we listen to for messages
+queue_url: https://sqs.us-east-1.amazonaws.com/930337447539/c7n_mailer_for_s3_events
+
+# Standard Lambda Function Config
+region: <Your_Region>
+role: <Your_IAM_Role>
+
+# Example: role: arn:aws:iam::930337447539:role/XXXX
+
+# Default from address
+from_address: sjayaramu@eplus.com
