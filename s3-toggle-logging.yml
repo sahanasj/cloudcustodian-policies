@@ -1,0 +1,22 @@
+policies:
+  - name: s3-toggle-logging
+    resource: s3
+    description: |
+      This policy is triggered when a S3 bucket is created and it applies
+      the AWS AES256 Default Bucket Encryption, Tags the creators ID, enables
+      object versioning, and enables logging.
+    mode:
+      type: cloudtrail
+      events:
+        - CreateBucket
+      role: arn:aws:iam::930337447539:role/S3-GovernanceForLincoln
+      timeout: 200
+    actions:
+      - type: auto-tag-user
+        tag: CreatorName
+      - type: set-bucket-encryption
+      - type: toggle-versioning
+        enabled: true
+      - type: toggle-logging
+        # target_bucket: "{account_id}-{region}-s3-logs"
+        # target_prefix: "{source_bucket_name}/"
