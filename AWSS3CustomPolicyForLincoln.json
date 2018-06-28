@@ -1,0 +1,66 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GenerateCredentialReport",
+                "lambda:CreateFunction",
+                "tag:GetResources",
+                "lambda:ListFunctions",
+                "ses:SendRawEmail",
+                "events:PutRule",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents",
+                "ses:SendEmail",
+                "events:PutTargets",
+                "lambda:UpdateFunctionCode",
+                "iam:PassRole",
+                "logs:CreateLogStream",
+                "lambda:AddPermission",
+                "lambda:ListTags",
+                "iam:ListAccountAliases",
+                "iam:ListUsers",
+                "iam:GetCredentialReport"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "sqs:DeleteMessage",
+                "sqs:GetQueueUrl",
+                "sqs:ChangeMessageVisibility",
+                "sqs:SendMessageBatch",
+                "sqs:UntagQueue",
+                "lambda:GetFunction",
+                "sqs:ReceiveMessage",
+                "sqs:SendMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:ListQueueTags",
+                "sqs:TagQueue",
+                "sqs:ListDeadLetterSourceQueues",
+                "sqs:DeleteMessageBatch",
+                "sqs:PurgeQueue",
+                "sqs:DeleteQueue",
+                "sqs:CreateQueue",
+                "events:ListTargetsByRule",
+                "sqs:ChangeMessageVisibilityBatch",
+                "sqs:SetQueueAttributes"
+            ],
+            "Resource": [
+                "arn:aws:events:*:*:rule/*",
+                "arn:aws:sqs:*:*:*",
+                "arn:aws:lambda:*:*:function:*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": "events:DescribeRule",
+            "Resource": "arn:aws:events:*:*:rule/*"
+        }
+    ]
+}
