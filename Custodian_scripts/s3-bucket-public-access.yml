@@ -1,0 +1,33 @@
+policies:
+  - name: s3-public-access
+    resource: s3
+    description: |
+       This policy is triggered when a S3 bucket has Global Public Access.
+       It corrects the Global grants and secured S3 as private.
+    mode:
+      type: periodic
+      schedule: 'cron(0/2 * * * ? *)'
+      #schedule: 'rate(10 minutes)'
+      role: <ARN_AWS_IAM>
+    filters:
+      - type: global-grants
+      - "tag:Public": absent
+    actions:
+      - type: delete-global-grants
+      - type: notify
+        template: default.html
+        template_format: 'html'
+        priority_header: '3'
+        subject: "ALERT! - S3 : Invalid Global ACL on Bucket [AWS Account: {{ account }} - Region: {{ region }}]"
+        comments: "Violation of S3 policy - An attempt to place public ACLs on the bucket granting everyone in the world access!"
+        violation_desc: |
+            Public ACLs were placed on the bucket granting everyone in the world access!
+            Custodian creates and configure a CloudWatch Event rule that triggers the Lambda function when detects an S3 bucket ACL or
+            policy violation. Then corrects the ACLs/policies and notify team of out-of-compliance policies.
+            The following bucket has Invalid Global ACL's.
+        action_desc: "Actions Taken: Corrects the ACLs/Policy and Notify User"
+        to:
+          - <EMAIL_ADDRESS_TO_SEND_NOTIFICATION>
+        transport:
+          type: sqs
+          queue: <SQS_QUEUE_URL>

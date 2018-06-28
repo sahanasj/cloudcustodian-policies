@@ -1,0 +1,9 @@
+# Which queue should we listen to for messages
+queue_url: <SQS_QUEUE_URL>
+
+# Standard Lambda Function Config
+region: <YOUR_TARGET_REGION>
+role: <ARN_AWS_IAM>
+
+# Default from address
+from_address: <Your_Verified_Email_Address>
