@@ -294,19 +294,36 @@ actions:
 ```
 </details>
 
-Reference: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+Reference: 
+<a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html/">Schedule Expressions for Rules</a> <br>
 Useful Tool: <a href="https://crontab.guru/">Quick simple editor for cron schedule expressions.</a>
 
-Note:
-Config:	May run in a different region but not cross-account <br>
-Event:	Only run in the same region and account <br>
-Periodic:	May run in a different region and different account <br>
+**Note** <br>
+**Config**:	May run in a different region but not cross-account <br>
+**Event**:	Only run in the same region and account <br>
+**Periodic**:	May run in a different region and different account <br>
 
-# Resources
+# Cloud Custodian Important Resources
+[Cloud Custodian - All Resources](http://capitalone.github.io/cloud-custodian/)<br>
+[Cloud Custodian - Getting Started](http://capitalone.github.io/cloud-custodian/docs/quickstart/index.html)<br>
+[Cloud Custodian - Github](https://github.com/capitalone/cloud-custodian)<br>
+[Cloud Custodian - Docs](http://capitalone.github.io/cloud-custodian/docs/index.html)<br>
+[Cloud Custodian - 400+ actions and 300+ filters to build policies with](https://pypi.org/project/c7n/)<br>
+[Cloud Custodian - Features](https://developer.capitalone.com/opensource-projects/cloud-custodian/)<br>
+[Cloud Custodian - S3 Module](http://capitalone.github.io/cloud-custodian/docs/generated/aws/c7n.resources.html#module-c7n.resources.s3)<br>
+[Blog - Using Cloud Custodian for Cloud Governance in AWS](https://www.linkedin.com/pulse/using-cloud-custodian-governance-aws-tejaswi-konduri)<br>
 [Lambda Support](http://capitalone.github.io/cloud-custodian/docs/policy/lambda.html)<br>
+[Lambda](https://github.com/capitalone/cloud-custodian/blob/master/docs/source/policy/lambda.rst)<br>
 [AWS CloudWatch Schedule Rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)<br>
+[S3 Data Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/log-s3-data-events.html)<br>
 [CloudWatch Rules Expressions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)<br>
 [Adding Custom Fields to Reports](http://capitalone.github.io/cloud-custodian/docs/quickstart/advanced.html#adding-custom-fields-to-reports)<br>
+[Custodian Mailer](https://github.com/capitalone/cloud-custodian/tree/master/tools/c7n_mailer)<br>
+[C7N_Mailer](https://pypi.org/project/c7n_mailer/)<br>
+
+
+
+
 
 
 
