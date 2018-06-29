@@ -1,0 +1,36 @@
+============================
+c7n-mailer Developer Install
+============================
+$ virtualenv c7n_mailer
+$ source c7n_mailer/bin/activate
+$ git clone https://github.com/capitalone/cloud-custodian
+$ cd cloud-custodian
+$ cd tools/c7n_mailer
+$ pip install -r requirements.txt
+$ python setup.py develop
+
+===================
+Invoking c7n Mailer
+===================
+c7n-mailer --config mailer.yml --update-lambda && custodian run -c test.yml -s .
+c7n-mailer --config mailer_iesandbox.yml --update-lambda && custodian run -c test.yml -s .
+
+===============================
+Finding Default Email Templates
+===============================
+find ~/ -type f -name "default.html.j2" 
+find ~/ -type f -name "slack_default.j2"
+
+==============================
+Clearing Cloud Custodian Cache
+==============================
+$ custodian run --help
+$ rm ~/.cache/cloud-custodian.cache
+
+===================
+Useful Git Commands
+===================
+git clone -b mailer-test https://github.com/LykinsN/cloud-custodian.git
+git pull  (from directory branch was cloned)
+git branch -a  (to view branch info)
+
