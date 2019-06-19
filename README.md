@@ -94,6 +94,52 @@ The mailer runs every five minutes, so wait a bit and then look for an email in 
 </pre>
 </details>
 
+# C7N Mailer Workflow - AWS SES Sends a mail on violation occurs in S3 Bucket
+<details>
+<summary>Workflow</summary>
+ 
+**Steps for Cloud Custodian mailer to ensure S3 Governance and Compliance.**
+ <br>
+ Step 1: Create Mailer file
+ 
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/mailer-function.PNG">
+ 
+**Step 2: Create Custodian Policy for S3 Public read/write Access - Sends email notification via Simple Email Service (SES) using notify action**
+
+$ vim s3-bucket-public-access-check.yml .
+
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/custodian-public-access-and-mailer.PNG">
+
+**Step 3: Run a Command that installs the mailer and run a policy that triggers an email to your inbox.**
+
+$ c7n-mailer --config mailer.yml --update-lambda && custodian run -c s3-bucket-public-access-check.yml -s .
+
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/Custodian-AWS-S3-Public-Access-Script.PNG">
+ 
+**Step 4: Check the AWS console for a new Lambda and CWE named "cloud-custodian-mailer" and "custodian-s3-public-access".**
+
+**Lambda Functions:**
+
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/1-lambda-functions.PNG">
+
+**CloudWatch Events:**
+
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/2-CWE-Events.PNG">
+
+**CWE S3 Bucket Logs:**
+
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/3-CWE-mailer-logs.PNG">
+
+**CWE Custodian mailer Logs:**
+
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/4-CWE-s3-logs.PNG">
+ 
+**Step 5: Cloud Custodian mailer deployed lambda and sends a customized mail via SES service.**
+
+ <img src="https://github.com/sahanasj/cloudcustodian-policies/blob/master/AWS-Custodian-Images/AWS-Lincoln-C7N-Mailer-Workflow/5-c7n-mailer.PNG">
+
+</details>
+
 # Environment Settings
 <details>
 <summary>mailer.yml</summary>
